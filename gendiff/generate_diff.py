@@ -32,7 +32,7 @@ def generate_diff(first_file, second_file, format=None):
             result.append('  - {}: {}'.format(key, file1[key]))
     result.append('}')
     result = '\n'.join(result)
-    print(result)
+    return result
 
 
 if __name__ == "__main__":

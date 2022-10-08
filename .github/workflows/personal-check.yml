@@ -1,0 +1,36 @@
+name: personal-check
+
+on:
+  push:
+    branches: [ main, draft ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with: 
+          python-version: "3.10"
+      - name: Set up poetry with deps
+        run: |
+          pip install poetry
+          make install
+      - name: Lints and tests
+        run: |
+          make lint
+          make test
+      - name: Code coverage
+        uses: paambaati/codeclimate-action@v2.7.4
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.TEST_REPORTER_ID }}
+        with:
+          coverageCommand: make test-coverage
+
+
+
