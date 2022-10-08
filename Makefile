@@ -1,10 +1,13 @@
-info:
-		poetry run gendiff --help
+install:
+		poetry install
 
 lint:
 		poetry run flake8 gendiff
 
-check: lint
+test:
+		poetry run pytest
+
+check: lint test
 
 
 build: check
