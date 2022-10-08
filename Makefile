@@ -7,7 +7,10 @@ lint:
 test:
 		poetry run pytest
 
-check: lint test
+test-coverage:
+		poetry run pytest --cov=gendiff --cov-report xml
+
+check: lint test cov
 
 
 build: check
