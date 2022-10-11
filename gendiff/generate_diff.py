@@ -1,25 +1,12 @@
-from gendiff.reader import read
+from gendiff.format.format import format_diff
+from gendiff.tools.tree import get_diff_tree
+from gendiff.tools.reader import read
 
 
-def generate_diff(first_file, second_file, format=None):
-    file1 = read(first_file)
-    file2 = read(second_file)
-    keys1, keys2 = file1.keys(), file2.keys()
-    keys = sorted(keys1 | keys2)
-    result = ['{']
-    for key in keys:
-        if key in keys1 and key in keys2:
-            if file1[key] == file2[key]:
-                result.append('    {}: {}'.format(key, file1[key]))
-            else:
-                result.append('  - {}: {}'.format(key, file1[key]))
-                result.append('  + {}: {}'.format(key, file2[key]))
-        elif key not in keys1:
-            result.append('  + {}: {}'.format(key, file2[key]))
-        elif key not in keys2:
-            result.append('  - {}: {}'.format(key, file1[key]))
-    result.append('}')
-    result = '\n'.join(result)
+def generate_diff(first_file, second_file, format):
+    file1, file2 = read(first_file), read(second_file)
+    diff = get_diff_tree(file1, file2)
+    result = format_diff(diff, format)
     print(result)
     return result
 

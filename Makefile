@@ -16,4 +16,5 @@ check: lint test cov
 build: check
 		poetry build
 
-
+run:
+		poetry run gendiff tests/fixtures/file1_tree.json tests/fixtures/file2_tree.json
