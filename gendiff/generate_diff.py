@@ -7,7 +7,6 @@ def generate_diff(first_file, second_file, format):
     file1, file2 = read(first_file), read(second_file)
     diff = get_diff_tree(file1, file2)
     result = format_diff(diff, format)
-    print(result)
     return result
 
 
