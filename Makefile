@@ -17,4 +17,4 @@ build: check
 		poetry build
 
 run:
-		poetry run gendiff --format plain tests/fixtures/file1_tree.json tests/fixtures/file2_tree.json
+		poetry run gendiff --format json tests/fixtures/file1_tree.json tests/fixtures/file2_tree.json
